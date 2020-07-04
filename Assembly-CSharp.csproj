@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\UIRebuildChecker.cs" />
     <Compile Include="Assets\UnityEngine.UI\EventSystem\EventData\AxisEventData.cs" />
     <Compile Include="Assets\UnityEngine.UI\EventSystem\EventData\BaseEventData.cs" />
     <Compile Include="Assets\UnityEngine.UI\EventSystem\EventData\PointerEventData.cs" />
@@ -346,21 +347,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>D:/software/unity2018.3.8/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/software/unityProject/TestUGUISourceCode/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/software/unityProject/TestUGUISourceCode/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/software/unityProject/TestUGUISourceCode/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/software/unity2018.3.8/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>D:/software/unity2018.3.8/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/software/unity2018.3.8/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

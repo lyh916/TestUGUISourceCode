@@ -10,54 +10,7 @@ namespace UnityEngine.UI
         GraphicRebuild,
     }
 
-    public class UIRebuildChecker
-    {
-        private static UIRebuildChecker instance;
-        public static UIRebuildChecker Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new UIRebuildChecker();
-                }
-                return instance;
-            }
-        }
-
-        private Canvas GetCanvas(Transform tra, ref int i)
-        {
-            Canvas can = tra.GetComponent<Canvas>();
-            if (can == null)
-            {
-                i++;
-                return GetCanvas(tra.parent, ref i);
-            }
-            return can;
-        }
-
-        public void Check(ICanvasElement canvasElement, UIRebuildType rebuildType)
-        {
-            Transform tra = canvasElement.transform;
-            GameObject go = tra.gameObject;
-            int depth = 0;
-            Canvas can = GetCanvas(tra, ref depth);
-
-            if (Application.isPlaying)
-            {
-                string str;
-                if (rebuildType == UIRebuildType.LayoutRebuild)
-                {
-                    str = "(LayoutRebuild){0}:{1},depth:{2}";
-                }
-                else
-                {
-                    str = "(GraphicRebuild){0}:{1},depth:{2}";
-                }
-                Debug.LogWarningFormat(tra, str, can.name, go.name, depth);
-            }
-        }
-    }
+    public delegate void RebuildDelegate(ICanvasElement canvasElement, UIRebuildType rebuildType);
 
     /// <summary>
     /// Values of 'update' called on a Canvas update.
@@ -135,6 +88,8 @@ namespace UnityEngine.UI
 
         private readonly IndexedSet<ICanvasElement> m_LayoutRebuildQueue = new IndexedSet<ICanvasElement>();
         private readonly IndexedSet<ICanvasElement> m_GraphicRebuildQueue = new IndexedSet<ICanvasElement>();
+
+        public event RebuildDelegate rebuildEvent;
 
         protected CanvasUpdateRegistry()
         {
@@ -224,7 +179,10 @@ namespace UnityEngine.UI
                     {
                         if (ObjectValidForUpdate(rebuild))
                         {
-                            UIRebuildChecker.Instance.Check(rebuild, UIRebuildType.LayoutRebuild);
+                            if (rebuildEvent != null)
+                            {
+                                rebuildEvent(rebuild, UIRebuildType.LayoutRebuild);
+                            }
                             rebuild.Rebuild((CanvasUpdate)i);
                         }
                     }
@@ -254,7 +212,10 @@ namespace UnityEngine.UI
                         var element = instance.m_GraphicRebuildQueue[k];
                         if (ObjectValidForUpdate(element))
                         {
-                            UIRebuildChecker.Instance.Check(element, UIRebuildType.GraphicRebuild);
+                            if (rebuildEvent != null)
+                            {
+                                rebuildEvent(element, UIRebuildType.GraphicRebuild);
+                            }
                             element.Rebuild((CanvasUpdate)i);
                         }
                     }

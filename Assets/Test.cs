@@ -7,6 +7,7 @@ public class Test : MonoBehaviour
 {
     public Transform canvasTra;
     public Text text;
+    public Text text2;
     private int count = 1;
 
     // Start is called before the first frame update
@@ -30,5 +31,6 @@ public class Test : MonoBehaviour
         //text.rectTransform.anchoredPosition = new Vector3(-365 + count, -121, 0);
         //text.rectTransform.sizeDelta = new Vector2(500 + count, 500f);
         text.text = count.ToString();
+        text2.text = (count * 2).ToString();
     }
 }
